@@ -76,6 +76,7 @@ class TicTacToe
     loop do
       player1_selection
       return if check_winner == true
+
       player2_selection
     end
   end
