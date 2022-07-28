@@ -1,9 +1,13 @@
 # frozen_string_literal: true
 
 class TicTacToe
-  @grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-  def self.create_board
+
+  def initialize
+    @grid = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  end
+
+  def create_board
     puts " #{@grid[0]} | #{@grid[1]} | #{@grid[2]} "
     puts '___________'
     puts " #{@grid[3]} | #{@grid[4]} | #{@grid[5]} "
@@ -12,37 +16,40 @@ class TicTacToe
     puts 'Player 1 - o and Player 2 - x'
   end
 
-  def self.player1_selection
+  def player1_selection
     print 'Player 1: '
-    player1 = gets.chomp
+    player1 = gets.chomp.to_i
     grid = @grid.collect do |value|
-      if value == player1.to_i
-        value = 'o'
-      else
-        value
-      end
+      value == player1 ? 'o' : value
     end
     @grid = grid
     puts create_board
-    p @grid
   end
 
-  def self.player2_selection
+  def player2_selection
     print 'Player 2: '
-    player2 = gets.chomp
+    player2 = gets.chomp.to_i
     grid = @grid.collect do |value|
-      if value == player2.to_i
-        value = 'x'
-      else
-        value
-      end
+      value == player2 ? 'x' : value
     end
     @grid = grid
     puts create_board
-    p @grid
   end
 
-  def self.check_winner
+  # def player1_win_combo?
+
+  #   @grid[0] == "o" && @grid[1] == "o" && @grid[2] == "o"
+  #   @grid[3] == "o" && @grid[4] == "o" && @grid[5] == "o"
+  #   @grid[6] == "o" && @grid[7] == "o" && @grid[8] == "o"
+  #   @grid[0] == "o" && @grid[3] == "o" && @grid[6] == "o"
+  #   @grid[1] == "o" && @grid[4] == "o" && @grid[7] == "o"
+  #   @grid[2] == "o" && @grid[5] == "o" && @grid[8] == "o"
+  #   @grid[0] == "o" && @grid[4] == "o" && @grid[8] == "o"
+  #   @grid[2] == "o" && @grid[4] == "o" && @grid[6] == "o"
+
+  # end
+
+  def check_winner
     if @grid[0] == 'o' && @grid[1] == 'o' && @grid[2] == 'o' ||
        @grid[3] == 'o' && @grid[4] == 'o' && @grid[5] == 'o' ||
        @grid[6] == 'o' && @grid[7] == 'o' && @grid[8] == 'o' ||
@@ -65,18 +72,15 @@ class TicTacToe
     end
   end
 
-  def self.play_game
-    4.times do
-      if check_winner == true
-        break
-      else
-        player1_selection
-        player2_selection
-      end
+  def play_game
+    loop do
+      player1_selection
+      return if check_winner == true
+      player2_selection
     end
-    nil
   end
 end
 
-TicTacToe.create_board
-TicTacToe.play_game
+tic_tac_toe = TicTacToe.new
+tic_tac_toe.create_board
+tic_tac_toe.play_game
