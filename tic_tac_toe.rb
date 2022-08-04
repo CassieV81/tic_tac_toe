@@ -33,28 +33,22 @@ class TicTacToe
   def player1_selection
     print 'Player 1: make your selection '
     @player1 = gets.chomp.to_i
-    if @grid.include?(@player1)
-      player1_valid_selection
-    else
+    unless @grid.include?(@player1)
       puts 'Invalid number! Select a valid number...'
       @player1 = gets.chomp.to_i
-      player1_valid_selection
     end
-    @grid = grid
+    player1_valid_selection
     puts create_board
   end
 
   def player2_selection
     print 'Player 2: make your selection '
     @player2 = gets.chomp.to_i
-    if @grid.include?(@player2)
-      player2_valid_selection
-    else
+    unless @grid.include?(@player2)
       puts 'Invalid number! Select a valid number...'
       @player2 = gets.chomp.to_i
-      player2_valid_selection
     end
-    @grid = grid
+    player2_valid_selection
     puts create_board
   end
 
@@ -81,14 +75,14 @@ class TicTacToe
   end
 
   def no_winner?
-    @grid.any? {|i| i.is_a?(Integer)}
+    @grid.any? { |i| i.is_a?(Integer) }
   end
 
   def play_game
     until player1_win? == true || player2_win? == true || no_winner? != true
       player1_selection
       if player1_win? == true
-        puts 'Player 1 wins' 
+        puts 'Player 1 wins'
       elsif no_winner? != true
         puts 'No winner! Try again...'
       else
