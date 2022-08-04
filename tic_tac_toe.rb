@@ -14,11 +14,29 @@ class TicTacToe
     puts 'Player 1 = o and Player 2 = x'
   end
 
+  def player1_valid_selection
+    grid = @grid.collect do |value|
+      value == @player1 ? 'o' : value
+    end
+    @grid = grid
+  end
+
+  def player2_valid_selection
+    grid = @grid.collect do |value|
+      value == @player2 ? 'x' : value
+    end
+    @grid = grid
+  end
+
   def player1_selection
     print 'Player 1: make your selection '
-    player1 = gets.chomp.to_i
-    grid = @grid.collect do |value|
-      value == player1 ? 'o' : value
+    @player1 = gets.chomp.to_i
+    if @grid.include?(@player1)
+      player1_valid_selection
+    else
+      puts 'Invalid number! Select a valid number...'
+      @player1 = gets.chomp.to_i
+      player1_valid_selection
     end
     @grid = grid
     puts create_board
@@ -26,9 +44,13 @@ class TicTacToe
 
   def player2_selection
     print 'Player 2: make your selection '
-    player2 = gets.chomp.to_i
-    grid = @grid.collect do |value|
-      value == player2 ? 'x' : value
+    @player2 = gets.chomp.to_i
+    if @grid.include?(@player2)
+      player2_valid_selection
+    else
+      puts 'Invalid number! Select a valid number...'
+      @player2 = gets.chomp.to_i
+      player2_valid_selection
     end
     @grid = grid
     puts create_board
