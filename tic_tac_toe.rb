@@ -8,12 +8,12 @@ class TicTacToe
   end
 
   def create_board
+    puts 'Player 1 = o and Player 2 = x'
     puts " #{@grid[0]} | #{@grid[1]} | #{@grid[2]} "
     puts '___________'
     puts " #{@grid[3]} | #{@grid[4]} | #{@grid[5]} "
     puts '___________'
     puts " #{@grid[6]} | #{@grid[7]} | #{@grid[8]} "
-    puts 'Player 1 = o and Player 2 = x'
   end
 
   def player1_valid_selection
@@ -33,7 +33,7 @@ class TicTacToe
   def player1_selection
     print 'Player 1: make your selection '
     @player1 = gets.chomp.to_i
-    unless @grid.include?(@player1)
+    until @grid.include?(@player1)
       puts 'Invalid number! Select a valid number...'
       @player1 = gets.chomp.to_i
     end
@@ -44,7 +44,7 @@ class TicTacToe
   def player2_selection
     print 'Player 2: make your selection '
     @player2 = gets.chomp.to_i
-    unless @grid.include?(@player2)
+    until @grid.include?(@player2)
       puts 'Invalid number! Select a valid number...'
       @player2 = gets.chomp.to_i
     end
