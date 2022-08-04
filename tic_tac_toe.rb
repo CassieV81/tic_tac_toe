@@ -78,12 +78,21 @@ class TicTacToe
       @grid[2] == 'x' && @grid[4] == 'x' && @grid[6] == 'x'
   end
 
+  def no_winner?
+    @grid.any? {|i| i.is_a?(Integer)}
+  end
+
   def play_game
-    until player1_win? == true || player2_win? == true
+    until player1_win? == true || player2_win? == true || no_winner? != true
       player1_selection
-      puts 'Player 1 wins' if player1_win? == true
-      player2_selection
-      puts 'Player 2 wins' if player2_win? == true
+      if player1_win? == true
+        puts 'Player 1 wins' 
+      elsif no_winner? != true
+        puts 'No winner! Try again...'
+      else
+        player2_selection
+        puts 'Player 2 wins' if player2_win? == true
+      end
     end
   end
 end
